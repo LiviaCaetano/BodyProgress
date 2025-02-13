@@ -1,0 +1,42 @@
+.button-component {
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px #D3CFCF;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.button-component-sm {
+  height: 30px;
+  font-size: 13px;
+}
+
+.button-component-md {
+  height: 35px;
+  font-size: 14px;
+}
+
+.button-component-lg {
+  height: 40px;
+  font-size: 15px;
+}
+
+.button-component-primary {
+  background: #1E88E5;
+  color: #FFFFFF;
+  border: none;
+
+  &:hover {
+    background: #1565C0;
+  }
+}
+
+.button-component-secondary {
+  background: #FFFFFF;
+  color: #1E88E5;
+  border: 1px solid #1E88E5;
+  
+  &:hover {
+    background: #E3F2FD;
+  }
+}
