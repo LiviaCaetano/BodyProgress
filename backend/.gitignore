@@ -1,0 +1,11 @@
+# Pastas e arquivos gerados pelo Eclipse
+.settings/
+.classpath
+.project
+
+# Pasta target gerada pelo Maven
+/target/
+
+# Outros arquivos temporários ou de log
+*.log
+*.tmp
