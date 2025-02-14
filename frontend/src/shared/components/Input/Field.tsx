@@ -1,19 +1,31 @@
 import "./styles.scss";
 
 type FieldProps = {
+  id: string;
   type?: string;
   placeholder?: string;
-  hasError?: boolean;
+  value?: string;
+  onChange?: (value: string) => void;
+  required?: boolean;
 };
 
 export const Field = ({
+  id,
   type = "text",
-  placeholder = "",
-  hasError = false,
+  placeholder,
+  value,
+  onChange,
+  required,
 }: FieldProps) => {
   return (
-    <div className={`input-field ${hasError && "input-field-error"}`}>
-      <input type={type} placeholder={placeholder} />
-    </div>
+    <input
+      id={id}
+      type={type}
+      className="custom-input"
+      placeholder={placeholder}
+      value={value}
+      onChange={(e) => onChange && onChange(e.target.value)}
+      required={required}
+    />
   );
 };

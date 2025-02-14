@@ -6,5 +6,5 @@ type RootProps = {
 };
 
 export const Root = ({ children }: RootProps) => {
-  return <div className="input-root">{children}</div>;
+  return <div className="input-container">{children}</div>;
 };

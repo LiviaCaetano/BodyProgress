@@ -1,10 +1,10 @@
 import "./styles.scss";
 
 type ErrorProps = {
+  hasError?: boolean;
   message?: string;
-  hasError: boolean;
 };
 
-export const Error = ({ hasError, message }: ErrorProps) => {
-  return hasError && <div className="input-error">** {message}</div>;
+export const Error = ({ message, hasError = false }: ErrorProps) => {
+  return hasError && <span className="error-message">{message}</span>;
 };
