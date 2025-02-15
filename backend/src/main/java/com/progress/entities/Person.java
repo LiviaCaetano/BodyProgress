@@ -2,14 +2,21 @@ package com.progress.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Table(name = "person")
 @Entity
@@ -23,6 +30,15 @@ public class Person implements Serializable {
 	@NotBlank(message = "Nome é obrigatório")
 	private String name;
 
+	private String username;
+
+	@NotBlank(message = "Senha é obrigatória")
+	@Size(min = 8, message = "A senha deve ter pelo menos 6 caracteres")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private String passwordHash;
+
+	private String token;
+
 	@Column(name = "date_of_birth")
 	private LocalDate dateOfBirth;
 
@@ -30,13 +46,22 @@ public class Person implements Serializable {
 
 	private Double height;
 
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "person_id", referencedColumnName = "id", insertable = false, updatable = false)
+	private List<Measures> measures;
+
 	public Person() {
 	}
 
-	public Person(Long id, @NotBlank(message = "Nome é obrigatório") String name, LocalDate dateOfBirth, String gender,
-			Double height) {
+	public Person(Long id, @NotBlank(message = "Nome é obrigatório") String name, String username,
+			@NotBlank(message = "Senha é obrigatória") @Size(min = 8, message = "A senha deve ter pelo menos 8 caracteres") String passwordHash,
+			String token, LocalDate dateOfBirth, String gender, Double height) {
+		super();
 		this.id = id;
 		this.name = name;
+		this.username = username;
+		this.passwordHash = passwordHash;
+		this.token = token;
 		this.dateOfBirth = dateOfBirth;
 		this.gender = gender;
 		this.height = height;
@@ -56,6 +81,30 @@ public class Person implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getUserName() {
+		return username;
+	}
+
+	public void setUserName(String userName) {
+		this.username = userName;
+	}
+
+	public String getPasswordHash() {
+		return passwordHash;
+	}
+
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public LocalDate getDateOfBirth() {
@@ -80,6 +129,14 @@ public class Person implements Serializable {
 
 	public void setHeight(Double height) {
 		this.height = height;
+	}
+
+	public List<Measures> getMeasures() {
+		return measures;
+	}
+
+	public void setMeasures(List<Measures> measures) {
+		this.measures = measures;
 	}
 
 	@Override
