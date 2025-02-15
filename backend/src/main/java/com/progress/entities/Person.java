@@ -30,10 +30,11 @@ public class Person implements Serializable {
 	@NotBlank(message = "Nome é obrigatório")
 	private String name;
 
+	@NotBlank(message = "username é obrigatória")
 	private String username;
 
 	@NotBlank(message = "Senha é obrigatória")
-	@Size(min = 8, message = "A senha deve ter pelo menos 6 caracteres")
+	@Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres")
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String passwordHash;
 
@@ -53,7 +54,8 @@ public class Person implements Serializable {
 	public Person() {
 	}
 
-	public Person(Long id, @NotBlank(message = "Nome é obrigatório") String name, String username,
+	public Person(Long id, @NotBlank(message = "Nome é obrigatório") String name,
+			@NotBlank(message = "username é obrigatória") String username,
 			@NotBlank(message = "Senha é obrigatória") @Size(min = 8, message = "A senha deve ter pelo menos 8 caracteres") String passwordHash,
 			String token, LocalDate dateOfBirth, String gender, Double height) {
 		super();
@@ -83,12 +85,13 @@ public class Person implements Serializable {
 		this.name = name;
 	}
 
+	@JsonProperty("username")
 	public String getUserName() {
 		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.username = userName;
+	public void setUserName(String username) {
+		this.username = username;
 	}
 
 	public String getPasswordHash() {
@@ -119,7 +122,7 @@ public class Person implements Serializable {
 		return gender;
 	}
 
-	public void setGenero(String gender) {
+	public void setGener(String gender) {
 		this.gender = gender;
 	}
 
