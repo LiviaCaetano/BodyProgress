@@ -1,0 +1,25 @@
+.empty-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 350px;
+  text-align: center;
+
+  span {
+    color: #CCCCCC;
+    letter-spacing: 2px;
+    font-size: 18px;
+  }
+
+  .empty-list-icon {
+    max-width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 30%;
+      height: auto;
+    }
+  }
+}

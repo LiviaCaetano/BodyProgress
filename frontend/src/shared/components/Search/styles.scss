@@ -1,11 +1,12 @@
 .search-container {
   display: flex;
+  height: 35px;
   align-items: center;
   background: white;
   border-radius: 8px;
   border: 2px solid #1E88E5;
   overflow: hidden;
-  max-width: 300px;
+  max-width: 350px;
   transition: 0.3s;
 
   .search-input {
@@ -22,6 +23,7 @@
   }
   
   .search-button {
+    max-width: 40px;
     background: #1E88E5;
     color: white;
     border: none;
