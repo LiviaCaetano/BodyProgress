@@ -56,7 +56,7 @@ public class Person implements Serializable {
 
 	public Person(Long id, @NotBlank(message = "Nome é obrigatório") String name,
 			@NotBlank(message = "username é obrigatória") String username,
-			@NotBlank(message = "Senha é obrigatória") @Size(min = 8, message = "A senha deve ter pelo menos 8 caracteres") String passwordHash,
+			@NotBlank(message = "Senha é obrigatória") @Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres") String passwordHash,
 			String token, LocalDate dateOfBirth, String gender, Double height) {
 		super();
 		this.id = id;

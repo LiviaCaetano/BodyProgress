@@ -7,23 +7,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.progress.Exception.PersonException;
-import com.progress.services.AuthenticationService;
+import com.progress.exception.PersonException;
+import com.progress.services.AuthenticationServices;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
 
-    private final AuthenticationService authenticationService;
+    private final AuthenticationServices authenticationServices;
 
-    public AuthenticationController(AuthenticationService authenticationService) {
-        this.authenticationService = authenticationService;
+    public AuthenticationController(AuthenticationServices authenticationServices) {
+        this.authenticationServices = authenticationServices;
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest request) {
         try {
-            boolean authenticated = authenticationService.authenticate(request.getUsername(), request.getPassword());
+            boolean authenticated = authenticationServices.authenticate(request.getUsername(), request.getPassword());
             
             System.out.println(request.getUsername());
             System.out.println(request.getPassword());

@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import com.progress.repositories.PersonRepository;
 
 @Service
-public class AuthenticationService {
+public class AuthenticationServices {
 
     private final PersonRepository personRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public AuthenticationService(PersonRepository personRepository, BCryptPasswordEncoder passwordEncoder) {
+    public AuthenticationServices(PersonRepository personRepository, BCryptPasswordEncoder passwordEncoder) {
         this.personRepository = personRepository;
         this.passwordEncoder = passwordEncoder;
     }

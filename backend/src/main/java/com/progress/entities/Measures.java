@@ -31,9 +31,9 @@ public class Measures implements Serializable {
 
 	private Double contractedArmR;
 
-	private Double forearmL;
+	private Double foreArmL;
 
-	private Double forearmR;
+	private Double foreArmR;
 
 	private Double haunchL;
 
@@ -47,7 +47,7 @@ public class Measures implements Serializable {
 
 	private Double contractedChest;
 
-	private Double wait;
+	private Double waist;
 
 	private Double abdomen;
 
@@ -63,8 +63,8 @@ public class Measures implements Serializable {
 	}
 
 	public Measures(Long id, Long personId, Double relaxedArmL, Double relaxedArmR, Double contractedArmL,
-			Double contractedArmR, Double forearmL, Double forearmR, Double haunchL, Double haunchR, Double calfL,
-			Double calfR, Double relaxedChest, Double contractedChest, Double wait, Double abdomen, Double hip,
+			Double contractedArmR, Double foreArmL, Double foreArmR, Double haunchL, Double haunchR, Double calfL,
+			Double calfR, Double relaxedChest, Double contractedChest, Double waist, Double abdomen, Double hip,
 			Double shoulder, Double currentWeight, LocalDateTime createdAt) {
 		super();
 		this.id = id;
@@ -73,15 +73,15 @@ public class Measures implements Serializable {
 		this.relaxedArmR = relaxedArmR;
 		this.contractedArmL = contractedArmL;
 		this.contractedArmR = contractedArmR;
-		this.forearmL = forearmL;
-		this.forearmR = forearmR;
+		this.foreArmL = foreArmL;
+		this.foreArmR = foreArmR;
 		this.haunchL = haunchL;
 		this.haunchR = haunchR;
 		this.calfL = calfL;
 		this.calfR = calfR;
 		this.relaxedChest = relaxedChest;
 		this.contractedChest = contractedChest;
-		this.wait = wait;
+		this.waist = waist;
 		this.abdomen = abdomen;
 		this.hip = hip;
 		this.shoulder = shoulder;
@@ -142,20 +142,20 @@ public class Measures implements Serializable {
 		this.contractedArmR = contractedArmR;
 	}
 
-	public Double getForearmL() {
-		return forearmL;
+	public Double getForeArmL() {
+		return foreArmL;
 	}
 
-	public void setForearmL(Double forearmL) {
-		this.forearmL = forearmL;
+	public void setForeArmL(Double foreArmL) {
+		this.foreArmL = foreArmL;
 	}
 
-	public Double getForearmR() {
-		return forearmR;
+	public Double getForeArmR() {
+		return foreArmR;
 	}
 
-	public void setForearmR(Double forearmR) {
-		this.forearmR = forearmR;
+	public void setForeArmR(Double foreArmR) {
+		this.foreArmR = foreArmR;
 	}
 
 	public Double getHaunchL() {
@@ -206,12 +206,12 @@ public class Measures implements Serializable {
 		this.contractedChest = contractedChest;
 	}
 
-	public Double getWait() {
-		return wait;
+	public Double getWaist() {
+		return waist;
 	}
 
-	public void setWait(Double wait) {
-		this.wait = wait;
+	public void setWaist(Double waist) {
+		this.waist = waist;
 	}
 
 	public Double getAbdomen() {

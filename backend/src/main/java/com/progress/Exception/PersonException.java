@@ -1,4 +1,4 @@
-package com.progress.Exception;
+package com.progress.exception;
 
 public class PersonException extends RuntimeException {
 
