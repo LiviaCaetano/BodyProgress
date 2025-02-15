@@ -7,8 +7,8 @@ type ErrorProps = {
 
 export const Error = ({ message, hasError = false }: ErrorProps) => {
   return (
-    hasError && (
-      <span className="error-message">{message || "**Campo obrigatório"}</span>
-    )
+    <span className="error-message">
+      {hasError && (message || "**Campo obrigatório")}
+    </span>
   );
 };

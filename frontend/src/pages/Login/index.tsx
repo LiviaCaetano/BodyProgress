@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { BPIcon } from "../../assets/svgIcons/BPIcon";
+import { AuthenticationContext } from "../../contexts/AuthenticationContext";
+import { Authentication } from "../../models/authentication";
 import { Button } from "../../shared/components/Button";
 import { Input } from "../../shared/components/Input";
+import { LoadingProgress } from "../../shared/components/LoadingProgress";
 import "./styles.scss";
 
 export const LoginPage = () => {
@@ -9,9 +13,11 @@ export const LoginPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<Authentication.Login>();
 
-  const onSubmit = (data: any) => {
+  const { handleLogin, isLoading } = useContext(AuthenticationContext);
+
+  const onSubmit = (data: Authentication.Login) => {
     console.log(data);
   };
 
@@ -20,19 +26,17 @@ export const LoginPage = () => {
       <div className="login-page-form">
         <div className="login-page-icon">
           <BPIcon />
-          <h1>
-            BodyProgress <br />
-            Acompanhe sua evolução, supere seus limites!
-          </h1>
+          <h1>BodyProgress</h1>
+          <p>Acompanhe sua evolução, supere seus limites!</p>
         </div>
         <div className="login-page-fields">
           <Input.Root>
             <Input.Label text="Usuário" variant="light" />
             <Input.Field
               placeholder="seu usuário..."
-              {...register("user", { required: true })}
+              {...register("username", { required: true })}
             />
-            <Input.Error hasError={!!errors?.user} />
+            <Input.Error hasError={!!errors?.username} />
           </Input.Root>
           <Input.Root>
             <Input.Label text="Senha" variant="light" />
@@ -50,6 +54,7 @@ export const LoginPage = () => {
           />
         </div>
       </div>
+      {isLoading && <LoadingProgress />}
     </div>
   );
 };

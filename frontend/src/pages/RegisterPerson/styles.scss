@@ -1,4 +1,4 @@
-.login-page {
+.register-person {
   width: 100%;
   height: 100dvh; 
   background-image: url('./../../assets/images/home.webp');
@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   
-  .login-page-form {
+  .register-person-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,8 +18,9 @@
     border-radius: 50px;
     background: #1E88E5;
     box-shadow: 0px 0px 5px #00000080;
+    padding: 20px;
 
-    .login-page-icon {
+    .register-person-icon {
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -31,38 +32,35 @@
       text-align: center;
     }
 
-    .login-page-fields {
-      width: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
+    .register-person-line {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;  
+    }
 
-      button {
-        width: 300px;
-      }
+    button {
+      margin-top: 10px;
+      width: 300px;
     }
   }
 }
 
 @media screen and (max-width: 480px) {
-  .login-page {
+  .register-person {
     background-image: none;
-
     
-    .login-page-form {
+    .register-person-form {
       width: 100%;
-      height: 100dvh;
+      height: 100%;
       border-radius: 0px;
       justify-content: center;
-
-      .login-page-icon {
-        padding: 0px 20px;
-      }
   
-      .login-page-fields {
-        padding: 20px;
-        width: 100%;
+      .register-person-icon {
+        svg {
+          width: 60%;
+          height: auto;
+        }
       }
     }
   }
