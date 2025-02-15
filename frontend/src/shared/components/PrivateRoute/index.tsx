@@ -9,5 +9,5 @@ type PrivateRouteProps = {
 export const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const { isLogged } = useSelector((state: any) => state.auth);
 
-  return !isLogged ? <Navigate to={"/login"} /> : children;
+  return isLogged ? <Navigate to={"/login"} /> : children;
 };

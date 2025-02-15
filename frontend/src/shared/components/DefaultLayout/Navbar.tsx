@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { FaHome } from "react-icons/fa";
 import { TbRulerMeasure } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
-import icon from "../../../assets/images/icon.png";
+import { BPIcon } from "../../../assets/svgIcons/BPIcon";
 import "./styles.scss";
 
 export const Navbar = () => {
@@ -27,7 +27,7 @@ export const Navbar = () => {
   return (
     <div className="default-layout-navbar">
       <div className="default-layout-navbar-icon">
-        <img src={icon} alt="platform-icon" />
+        <BPIcon />
       </div>
       <div className="default-layout-navbar-links">
         {listLinks?.map((link, index) => (
