@@ -1,31 +1,45 @@
+import {
+  ComponentPropsWithRef,
+  forwardRef,
+  HTMLInputTypeAttribute,
+  useState,
+} from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./styles.scss";
 
-type FieldProps = {
-  id: string;
-  type?: string;
-  placeholder?: string;
-  value?: string;
-  onChange?: (value: string) => void;
-  required?: boolean;
-};
+interface FieldProps extends ComponentPropsWithRef<"input"> {
+  type?: HTMLInputTypeAttribute;
+}
 
-export const Field = ({
-  id,
-  type = "text",
-  placeholder,
-  value,
-  onChange,
-  required,
-}: FieldProps) => {
+export const Field = forwardRef<HTMLInputElement, FieldProps>(function Field(
+  { type = "text", ...rest },
+  ref
+) {
+  const [showPass, setShowPass] = useState<boolean>(false);
+  const password = type === "password";
+
+  const handleFieldType = () =>
+    type === "password" ? (showPass ? "text" : "password") : type;
+
+  const handleTogglePass = () => {
+    return (
+      <div
+        className="custom-input-password"
+        onClick={() => setShowPass(!showPass)}
+      >
+        {!showPass ? <FaEye size={25} /> : <FaEyeSlash size={25} />}
+      </div>
+    );
+  };
   return (
-    <input
-      id={id}
-      type={type}
-      className="custom-input"
-      placeholder={placeholder}
-      value={value}
-      onChange={(e) => onChange && onChange(e.target.value)}
-      required={required}
-    />
+    <div className="input-container">
+      <input
+        ref={ref}
+        type={handleFieldType()}
+        className="custom-input"
+        {...rest}
+      />
+      {password && handleTogglePass()}
+    </div>
   );
-};
+});

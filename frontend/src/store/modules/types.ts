@@ -1,0 +1,9 @@
+export const CLICKED_BUTTON_SUCCESS: string = 'CLICKED_BUTTON_SUCCESS'
+export const CLICKED_BUTTON_REQUEST: string = 'CLICKED_BUTTON_REQUEST'
+export const CLICKED_BUTTON_FAILURE: string = 'CLICKED_BUTTON_FAILURE'
+
+export const LOGIN_REQUEST: string = 'LOGIN_REQUEST'
+export const LOGIN_SUCCESS: string = 'LOGIN_SUCCESS'
+export const LOGIN_FAILURE: string = 'LOGIN_FAILURE'
+
+export const PERSIST_REHYDRATE = 'persist/REHYDRATE'

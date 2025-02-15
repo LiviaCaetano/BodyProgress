@@ -1,14 +1,10 @@
 import "./styles.scss";
 
 type LabelProps = {
-  htmlFor: string;
   text: string;
+  variant: "light" | "solid";
 };
 
-export const Label = ({ htmlFor, text }: LabelProps) => {
-  return (
-    <label className="input-label" htmlFor={htmlFor}>
-      {text}
-    </label>
-  );
+export const Label = ({ text, variant }: LabelProps) => {
+  return <label className={`input-label input-label-${variant}`}>{text}</label>;
 };
