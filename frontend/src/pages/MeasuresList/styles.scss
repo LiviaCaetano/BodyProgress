@@ -13,3 +13,22 @@
     }
   }
 }
+
+@media screen and (max-width: 480px) {
+  .measures-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    .measures-list-header {
+      display: flex;
+      justify-content: none;
+      gap: 20px;
+  
+      button {
+        width: 40px;
+      }
+    }
+  }
+}

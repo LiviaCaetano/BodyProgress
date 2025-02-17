@@ -1,3 +1,5 @@
+import { Measure } from "./measures";
+
 export namespace Person {
   export type Register = {
     name: string;
@@ -6,5 +8,11 @@ export namespace Person {
     gender: string;
     height: number;
     dateOfBirth: Date;
+  };
+
+  export type Context = {
+    isLoading: boolean;
+    createMeasure: (data: Measure.Register, callback: () => void) => void;
+    measureList: Measure.List[];
   };
 }

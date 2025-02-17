@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import "./styles.scss";
 
 type ButtonProps = {
@@ -6,6 +7,7 @@ type ButtonProps = {
   text: string;
   onClick?: () => void;
   size?: "sm" | "md" | "lg";
+  icon?: ReactNode | any;
 };
 
 export const Button = ({
@@ -14,6 +16,7 @@ export const Button = ({
   onClick,
   variant,
   size = "md",
+  icon,
 }: ButtonProps) => {
   return (
     <button
@@ -21,6 +24,7 @@ export const Button = ({
       onClick={onClick}
       disabled={disabled}
     >
+      {icon && icon}
       {text}
     </button>
   );

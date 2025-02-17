@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { FaHome } from "react-icons/fa";
 import { TbRulerMeasure } from "react-icons/tb";
+import { TfiDashboard } from "react-icons/tfi";
 import { useNavigate } from "react-router-dom";
 import { BPIcon } from "../../../assets/svgIcons/BPIcon";
 import "./styles.scss";
@@ -21,6 +22,11 @@ export const Navbar = () => {
       icon: <TbRulerMeasure size={30} color="white" />,
       label: "Medidas",
       link: "/measures",
+    },
+    {
+      icon: <TfiDashboard size={30} color="white" />,
+      label: "IMC",
+      link: "/imc",
     },
   ];
 

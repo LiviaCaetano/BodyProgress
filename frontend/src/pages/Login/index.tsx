@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import { BPIcon } from "../../assets/svgIcons/BPIcon";
 import { AuthenticationContext } from "../../contexts/AuthenticationContext";
 import { Authentication } from "../../models/authentication";
-import { Button } from "../../shared/components/Button";
-import { Input } from "../../shared/components/Input";
-import { LoadingProgress } from "../../shared/components/LoadingProgress";
+import { Button } from "../../ui/components/Button";
+import { Input } from "../../ui/components/Input";
+import { LoadingProgress } from "../../ui/components/LoadingProgress";
 import "./styles.scss";
 
 export const LoginPage = () => {
@@ -33,6 +33,7 @@ export const LoginPage = () => {
           <Input.Root>
             <Input.Label text="Usuário" variant="light" />
             <Input.Field
+              variant="white"
               placeholder="seu usuário..."
               {...register("username", { required: true })}
             />
@@ -41,6 +42,7 @@ export const LoginPage = () => {
           <Input.Root>
             <Input.Label text="Senha" variant="light" />
             <Input.Field
+              variant="white"
               type="password"
               placeholder="******"
               {...register("password", { required: true })}

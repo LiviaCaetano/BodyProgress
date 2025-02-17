@@ -11,6 +11,6 @@ export namespace Authentication {
     handleLogin: (data: Authentication.Login) => void;
     handleLogout: () => void;
     registerPerson: (data: Person.Register) => void;
-    user: {};
+    person: { id: number };
   };
 }

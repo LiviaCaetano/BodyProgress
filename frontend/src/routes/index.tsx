@@ -1,10 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import { Home } from "../pages/Home";
+import { IMCPage } from "../pages/IMCPage";
 import { LoginPage } from "../pages/Login";
 import { MeasuresList } from "../pages/MeasuresList";
 import { RegisterPerson } from "../pages/RegisterPerson";
-import { DefaultLayout } from "../shared/components/DefaultLayout";
-import { PrivateRoute } from "../shared/components/PrivateRoute";
+import { DefaultLayout } from "../ui/components/DefaultLayout";
+import { PrivateRoute } from "../ui/components/PrivateRoute";
 
 export const Routers = () => {
   return (
@@ -34,6 +35,20 @@ export const Routers = () => {
               <DefaultLayout.Header />
               <DefaultLayout.Container>
                 <MeasuresList />
+              </DefaultLayout.Container>
+            </DefaultLayout.Root>
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/imc"
+        element={
+          <PrivateRoute>
+            <DefaultLayout.Root>
+              <DefaultLayout.Navbar />
+              <DefaultLayout.Header />
+              <DefaultLayout.Container>
+                <IMCPage />
               </DefaultLayout.Container>
             </DefaultLayout.Root>
           </PrivateRoute>

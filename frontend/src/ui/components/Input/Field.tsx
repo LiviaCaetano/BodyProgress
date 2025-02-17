@@ -9,10 +9,11 @@ import "./styles.scss";
 
 interface FieldProps extends ComponentPropsWithRef<"input"> {
   type?: HTMLInputTypeAttribute;
+  variant?: "default" | "white";
 }
 
 export const Field = forwardRef<HTMLInputElement, FieldProps>(function Field(
-  { type = "text", ...rest },
+  { type = "text", variant = "default", ...rest },
   ref
 ) {
   const [showPass, setShowPass] = useState<boolean>(false);
@@ -36,7 +37,8 @@ export const Field = forwardRef<HTMLInputElement, FieldProps>(function Field(
       <input
         ref={ref}
         type={handleFieldType()}
-        className="custom-input"
+        className={`custom-input custom-input-${variant}`}
+        pattern="^[^,]*$"
         {...rest}
       />
       {password && handleTogglePass()}

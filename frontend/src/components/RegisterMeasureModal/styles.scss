@@ -1,0 +1,53 @@
+.register-measure-modal {
+  width: 660px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-right: 20px;
+
+  .register-measure-modal-line {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 20px;
+
+    .register-measure-modal-item {
+      width: 200px;
+    }
+
+  }
+}
+
+.register-measure-modal-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .register-measure-modal {
+    width: 100%;
+
+    .register-measure-modal-line {
+      grid-template-columns: auto;
+      padding-right: 0px;
+
+      .register-measure-modal-item {
+        width: 100%;
+      }
+    }
+  }
+
+  .register-measure-modal-actions {
+    gap: 20px;
+  
+    button {
+      width: 150px;
+    }
+  }
+}

@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { BPIcon } from "../../assets/svgIcons/BPIcon";
 import { AuthenticationContext } from "../../contexts/AuthenticationContext";
 import { Person } from "../../models/person";
-import { Button } from "../../shared/components/Button";
-import { Input } from "../../shared/components/Input";
-import { LoadingProgress } from "../../shared/components/LoadingProgress";
-import { Select } from "../../shared/components/Select";
+import { Button } from "../../ui/components/Button";
+import { Input } from "../../ui/components/Input";
+import { LoadingProgress } from "../../ui/components/LoadingProgress";
+import { Select } from "../../ui/components/Select";
 import "./styles.scss";
 
 export const RegisterPerson = () => {
@@ -35,6 +35,7 @@ export const RegisterPerson = () => {
             <Input.Root>
               <Input.Label text="Nome" variant="light" />
               <Input.Field
+                variant="white"
                 placeholder="seu nome..."
                 {...register("name", { required: true })}
               />
@@ -45,6 +46,7 @@ export const RegisterPerson = () => {
             <Input.Root>
               <Input.Label text="Data de nascimento" variant="light" />
               <Input.Field
+                variant="white"
                 type="date"
                 placeholder="sua data de nascimento..."
                 {...register("dateOfBirth", { required: true })}
@@ -58,6 +60,7 @@ export const RegisterPerson = () => {
             <Input.Root>
               <Input.Label text="Altura" variant="light" />
               <Input.Field
+                variant="white"
                 type="number"
                 placeholder="sua altura..."
                 {...register("height", { required: true })}
@@ -83,6 +86,7 @@ export const RegisterPerson = () => {
             <Input.Root>
               <Input.Label text="Username" variant="light" />
               <Input.Field
+                variant="white"
                 placeholder="seu username..."
                 {...register("username", { required: true })}
               />
@@ -93,6 +97,7 @@ export const RegisterPerson = () => {
             <Input.Root>
               <Input.Label text="Senha" variant="light" />
               <Input.Field
+                variant="white"
                 type="password"
                 placeholder="******"
                 {...register("password", { required: true })}

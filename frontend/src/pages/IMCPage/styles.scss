@@ -1,0 +1,25 @@
+.imc-page {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  p {
+    font-size: 14px;
+  }
+
+  .imc-page-form {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 20px;
+  }
+
+  .imc-page-actions {
+    width: 100%;
+    justify-content: center;
+    display: flex;
+
+    button {
+      width: 300px;
+    }
+  }
+}

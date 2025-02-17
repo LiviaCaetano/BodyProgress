@@ -8,7 +8,7 @@ export const AuthenticationContext = createContext<Authentication.Context>({
   handleLogin: (data: Authentication.Login) => {},
   handleLogout: () => {},
   registerPerson: (data: Person.Register) => {},
-  user: {},
+  person: {} as any,
 });
 
 export const AuthenticationProvider = ({
@@ -17,7 +17,7 @@ export const AuthenticationProvider = ({
   children: ReactNode;
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const user = useSelector((state: any) => state.auth);
+  const person = useSelector((state: any) => state.auth);
 
   const handleLogin = (data: Authentication.Login) => {};
 
@@ -30,7 +30,7 @@ export const AuthenticationProvider = ({
     handleLogin,
     handleLogout,
     registerPerson,
-    user,
+    person,
   };
 
   return (

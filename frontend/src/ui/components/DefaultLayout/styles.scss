@@ -64,6 +64,49 @@
     height: 50px;
     background: #E3F2FD;
     box-shadow: 0px 2px 2px #D3CFCF;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+
+    svg {
+      width: 25px;
+      height: auto;
+      color: #1E88E5;
+      cursor: pointer;
+    }
+
+    .default-layout-header-menu {
+      position: fixed;
+      top: 40px;
+      right: 20px;
+      width: 140px;
+      background: #F8F9FA;
+      border-radius: 10px;
+      box-shadow: 0px 2px 2px #D3CFCF;
+      display: flex;
+      flex-direction: column;
+      
+      li {
+        padding: 10px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: flex-start;
+        cursor: pointer;
+        font-size: 14px;
+
+        &:hover {
+          background: #E3F2FD;
+          border-radius: 10px;
+        }
+      }
+
+      svg {
+        width: 20px;
+        height: auto;
+      }
+    }
   }
 
   .default-layout-container {
@@ -78,13 +121,14 @@
   .default-layout-root {
     .default-layout-navbar {
       position: fixed;
-      bottom: 0px;
+      bottom: 0;
       width: 100%;
       min-width: 480px;
       height: 80px !important;
       border-radius: 0;
       display: grid;
-      grid-template-columns: 20% auto;  
+      grid-template-columns: 20% auto;
+      
 
       .default-layout-navbar-icon {
         height: 80px;
@@ -117,10 +161,10 @@
         }
       }
     }
-    
   
     .default-layout-container {
       height: calc(100% - 130px);
+      border: 1px solid black;
     }
   }
 }
