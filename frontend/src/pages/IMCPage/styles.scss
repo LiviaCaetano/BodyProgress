@@ -39,6 +39,7 @@
     height: calc(100dvh - 175px);
     overflow-y: auto;
     overflow-x: hidden;
+    padding-right: 10px;
 
     .imc-page-form {
       grid-template-columns: auto;
