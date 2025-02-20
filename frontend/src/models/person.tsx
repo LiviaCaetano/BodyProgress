@@ -11,6 +11,14 @@ export namespace Person {
     dateOfBirth: Date;
   };
 
+  export type Store = {
+    id: number;
+    name: string;
+    username: string;
+    gender: string;
+    height: number;
+  };
+
   export type Context = {
     isLoading: boolean;
     createMeasure: (data: Measure.Register, callback: () => void) => void;
