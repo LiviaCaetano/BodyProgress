@@ -18,6 +18,7 @@ export const ManagePersonModal = ({ onClose }: ManagePersonModalProps) => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<Person.Store>({
     defaultValues: {
@@ -41,6 +42,7 @@ export const ManagePersonModal = ({ onClose }: ManagePersonModalProps) => {
           <Input.Root>
             <Input.Label text="Nome" variant="solid" />
             <Input.Field
+              defaultValue={getValues("name")}
               {...register("name", {
                 required: { value: true, message: "**Campo obrigatório" },
               })}
@@ -53,6 +55,7 @@ export const ManagePersonModal = ({ onClose }: ManagePersonModalProps) => {
           <Input.Root>
             <Input.Label text="Usuário" variant="solid" />
             <Input.Field
+              defaultValue={getValues("username")}
               {...register("username", {
                 required: { value: true, message: "**Campo obrigatório" },
               })}
@@ -65,6 +68,7 @@ export const ManagePersonModal = ({ onClose }: ManagePersonModalProps) => {
           <Input.Root>
             <Input.Label text="Altura" variant="solid" />
             <Input.Field
+              defaultValue={getValues("height")}
               {...register("height", {
                 required: { value: true, message: "**Campo obrigatório" },
               })}
@@ -77,6 +81,7 @@ export const ManagePersonModal = ({ onClose }: ManagePersonModalProps) => {
           <Select
             label="Gênero"
             variant="solid"
+            defaultValue={getValues("gender")}
             options={[
               { value: "F", label: "Feminino" },
               { value: "M", label: "Masculino" },
