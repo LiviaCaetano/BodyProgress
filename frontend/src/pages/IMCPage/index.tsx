@@ -1,9 +1,14 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { TfiDashboard } from "react-icons/tfi";
+import { ResultIMC } from "../../components/ResultIMC";
+import { PersonContext } from "../../contexts/PersonContext";
 import { IMC } from "../../models/imc";
 import { Button } from "../../ui/components/Button";
 import { Divider } from "../../ui/components/Divider";
+import { EmptyList } from "../../ui/components/EmptyList";
 import { Input } from "../../ui/components/Input";
+import { LoadingProgress } from "../../ui/components/LoadingProgress";
 import { Select } from "../../ui/components/Select";
 import { Title } from "../../ui/components/Title";
 import "./styles.scss";
@@ -13,15 +18,17 @@ export const IMCPage = () => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<IMC.Data>();
+  } = useForm<IMC.Params>();
+
+  const { calcIMC, imcResult, isLoading } = useContext(PersonContext);
 
   const options = [
     { value: "F", label: "Feminino" },
     { value: "M", label: "Masculino" },
   ];
 
-  const onSubmit = (data: IMC.Data) => {
-    console.log(data);
+  const onSubmit = (data: IMC.Params) => {
+    calcIMC(data);
   };
 
   return (
@@ -59,6 +66,14 @@ export const IMCPage = () => {
         />
       </div>
       <Divider text="Resultado" />
+      <div className="imc-page-result">
+        {imcResult && Object.values(imcResult)?.length ? (
+          <ResultIMC info={imcResult} />
+        ) : (
+          <EmptyList text="Nenhum resultado encontrado! Realize o calculo..." />
+        )}
+      </div>
+      {isLoading && <LoadingProgress />}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { PersonProvider } from "../contexts/PersonContext";
 import { Home } from "../pages/Home";
 import { IMCPage } from "../pages/IMCPage";
 import { LoginPage } from "../pages/Login";
@@ -48,7 +49,9 @@ export const Routers = () => {
               <DefaultLayout.Navbar />
               <DefaultLayout.Header />
               <DefaultLayout.Container>
-                <IMCPage />
+                <PersonProvider>
+                  <IMCPage />
+                </PersonProvider>
               </DefaultLayout.Container>
             </DefaultLayout.Root>
           </PrivateRoute>

@@ -1,3 +1,4 @@
+import { IMC } from "./imc";
 import { Measure } from "./measures";
 
 export namespace Person {
@@ -14,5 +15,7 @@ export namespace Person {
     isLoading: boolean;
     createMeasure: (data: Measure.Register, callback: () => void) => void;
     measureList: Measure.List[];
+    calcIMC: (data: IMC.Params) => void;
+    imcResult: IMC.Result | undefined;
   };
 }

@@ -1,4 +1,6 @@
 .imc-page {
+  width: 100%;
+  height: calc(100dvh - 90px);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -20,6 +22,33 @@
 
     button {
       width: 300px;
+    }
+  }
+
+  .imc-page-result {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .imc-page {
+    height: calc(100dvh - 175px);
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .imc-page-form {
+      grid-template-columns: auto;
+      gap: 10px;
+    }
+
+    .imc-page-actions {
+      button {
+        margin-top: 10px;
+      }
     }
   }
 }
