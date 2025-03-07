@@ -25,15 +25,15 @@ public class Person {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "Nome é obrigatório")
+	@NotBlank(message = "Name is required")
 	private String name;
 
-	@NotBlank(message = "username é obrigatória")
-	@Pattern(regexp = "^[a-z0-9]+$", message = "username deve ser todo minúsculo contendo apenas letras e números")
+	@NotBlank(message = "Username is required")
+	@Pattern(regexp = "^[a-z0-9]+$", message = "Username must be all lowercase containing only letters and numbers")
 	private String username;
 
-	@NotBlank(message = "Senha é obrigatória")
-	@Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres")
+	@NotBlank(message = "Password is required")
+	@Size(min = 6, message = "Password must be at least 6 characters long")
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String passwordHash;
 
@@ -53,9 +53,9 @@ public class Person {
 	public Person() {
 	}
 
-	public Person(Long id, @NotBlank(message = "Nome é obrigatório") String name,
-			@NotBlank(message = "username é obrigatória") @Pattern(regexp = "^[a-z0-9]+$", message = "username deve ser todo minúsculo contendo apenas letras e números") String username,
-			@NotBlank(message = "Senha é obrigatória") @Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres") String passwordHash,
+	public Person(Long id, @NotBlank(message = "Name is required") String name,
+			@NotBlank(message = "Username is required") @Pattern(regexp = "^[a-z0-9]+$", message = "Username must be all lowercase containing only letters and numbers") String username,
+			@NotBlank(message = "Password is required") @Size(min = 6, message = "Password must be at least 6 characters long") String passwordHash,
 			LocalDate dateOfBirth, String gender, Double height, String token, List<Measures> measures) {
 		super();
 		this.id = id;

@@ -1,6 +1,7 @@
 package com.progress.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -22,6 +23,8 @@ public class Measures implements Serializable {
 
 	@Column(name = "person_id", nullable = false)
 	private Long personId;
+
+	private LocalDate measurementDate;
 
 	private Double relaxedArmL;
 
@@ -62,10 +65,10 @@ public class Measures implements Serializable {
 	public Measures() {
 	}
 
-	public Measures(Long id, Long personId, Double relaxedArmL, Double relaxedArmR, Double contractedArmL,
-			Double contractedArmR, Double foreArmL, Double foreArmR, Double haunchL, Double haunchR, Double calfL,
-			Double calfR, Double relaxedChest, Double contractedChest, Double waist, Double abdomen, Double hip,
-			Double shoulder, Double currentWeight, LocalDateTime createdAt) {
+	public Measures(Long id, Long personId, LocalDate measurementDate, Double relaxedArmL, Double relaxedArmR,
+			Double contractedArmL, Double contractedArmR, Double foreArmL, Double foreArmR, Double haunchL,
+			Double haunchR, Double calfL, Double calfR, Double relaxedChest, Double contractedChest, Double waist,
+			Double abdomen, Double hip, Double shoulder, Double currentWeight, LocalDateTime createdAt) {
 		super();
 		this.id = id;
 		this.personId = personId;
@@ -108,6 +111,14 @@ public class Measures implements Serializable {
 
 	public void setPersonId(Long personId) {
 		this.personId = personId;
+	}
+
+	public LocalDate getMeasurementDate() {
+		return measurementDate;
+	}
+
+	public void setMeasurementDate(LocalDate measurementDate) {
+		this.measurementDate = measurementDate;
 	}
 
 	public Double getRelaxedArmL() {

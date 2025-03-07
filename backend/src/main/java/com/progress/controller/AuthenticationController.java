@@ -25,7 +25,8 @@ public class AuthenticationController {
 	private final PersonRepository personRepository;
 	private final JWTUtil jwtUtil;
 
-	public AuthenticationController(AuthenticationServices authenticationServices, PersonRepository personRepository, JWTUtil jwtUtil) {
+	public AuthenticationController(AuthenticationServices authenticationServices, PersonRepository personRepository,
+			JWTUtil jwtUtil) {
 		this.authenticationServices = authenticationServices;
 		this.personRepository = personRepository;
 		this.jwtUtil = jwtUtil;
@@ -37,12 +38,13 @@ public class AuthenticationController {
 			boolean authenticated = authenticationServices.authenticate(request.getUsername(), request.getPassword());
 
 			if (!authenticated) {
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Usuário ou senha incorretos"));
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+						.body(Map.of("error", "Incorrect username or password"));
 			}
 
 			Optional<Person> optionalUser = personRepository.findByUsername(request.getUsername());
 			if (optionalUser.isEmpty()) {
-				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Usuário não encontrado"));
+				return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "User not found"));
 			}
 
 			Person user = optionalUser.get();
@@ -64,7 +66,7 @@ public class AuthenticationController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", e.getMessage()));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body(Map.of("error", "Erro interno do servidor", "details", e.getMessage()));
+					.body(Map.of("error", "Internal Server Error", "details", e.getMessage()));
 		}
 	}
 

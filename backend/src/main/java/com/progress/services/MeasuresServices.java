@@ -1,6 +1,7 @@
 package com.progress.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,13 @@ public class MeasuresServices {
 	private MeasuresRepository measuresRepository;
 
 	public List<Measures> getMeasuresByPersonId(Long personId) {
-		return measuresRepository.findByPersonId(personId);
+	    List<Measures> measures = measuresRepository.findByPersonId(personId);
+
+	    if (measures.isEmpty()) {
+	        throw new NoSuchElementException("No measurements found for ID: " + personId);
+	    }
+
+	    return measures;
 	}
 
 	public Measures saveMeasures(Measures measures) {
