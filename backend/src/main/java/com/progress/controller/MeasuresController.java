@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.progress.config.JWTUtil;
 import com.progress.entities.Measures;
+import com.progress.entities.Person;
 import com.progress.services.MeasuresServices;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -68,6 +70,16 @@ public class MeasuresController {
 		}
 	}
 
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updatedMeasures(@PathVariable Long id, @RequestBody Person updatedMeasures,
+			HttpServletRequest request) {
+		if (!isValidToken(request)) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Access denied: Invalid Token.");
+		}
+
+		Measures measures = measuresServices.updatedMeasures(id, updatedMeasures);
+		return ResponseEntity.ok(measures);
+	}
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteMeasures(@PathVariable Long id, HttpServletRequest request) {
 		if (!isValidToken(request)) {

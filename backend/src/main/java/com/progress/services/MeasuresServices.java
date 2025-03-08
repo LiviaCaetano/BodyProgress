@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.progress.entities.Measures;
+import com.progress.entities.Person;
 import com.progress.repositories.MeasuresRepository;
 
 @Component
@@ -39,6 +40,13 @@ public class MeasuresServices {
 		return measuresRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Measure with ID " + "not found"));
 	}
+	
+	public Measures updatedMeasures(Long id, Person updatedMeasures) {
+		Measures existingMeasures = measuresRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Person not found with ID: " + id));
+		return measuresRepository.save(existingMeasures);
+	}
+
 
 	public void deleteMeasures(Long id) {
 		Measures measures = getMeasuresById(id);
