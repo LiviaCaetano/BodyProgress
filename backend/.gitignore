@@ -2,6 +2,8 @@
 .settings/
 .classpath
 .project
+.vscode
+.metadata
 
 # Pasta target gerada pelo Maven
 /target/

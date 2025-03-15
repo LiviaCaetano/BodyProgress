@@ -3,13 +3,13 @@ import * as types from '../types'
 type AuthState = {
   isLogged: boolean
   token: string
-  user: {}
+  person: {}
 }
 
 const initialState: AuthState = {
   isLogged: false,
   token: '',
-  user: {}
+  person: {}
 }
 
 export const auth = (state = initialState, action: any) => {
@@ -17,8 +17,8 @@ export const auth = (state = initialState, action: any) => {
     case types.LOGIN_SUCCESS: {
       const newState = { ...state }
       newState.isLogged = true
-      newState.token = action?.payload?.token
-      newState.user = action?.payload?.user
+      newState.token = action?.payload?.person?.token
+      newState.person = action?.payload?.person
       return newState
     }
 

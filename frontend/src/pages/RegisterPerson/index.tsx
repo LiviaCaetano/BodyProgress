@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 import { BPIcon } from "../../assets/svgIcons/BPIcon";
 import { AuthenticationContext } from "../../contexts/AuthenticationContext";
 import { Person } from "../../models/person";
@@ -17,12 +19,13 @@ export const RegisterPerson = () => {
   } = useForm<Person.Register>();
 
   const { registerPerson, isLoading } = useContext(AuthenticationContext);
+  const { isLogged } = useSelector((state: any) => state?.auth)
 
   const onSubmit = (data: Person.Register) => {
-    console.log(data);
+    registerPerson(data);
   };
 
-  return (
+  return !isLogged ? (
     <div className="register-person">
       <div className="register-person-form">
         <div className="register-person-icon">
@@ -100,9 +103,9 @@ export const RegisterPerson = () => {
                 variant="white"
                 type="password"
                 placeholder="******"
-                {...register("password", { required: true })}
+                {...register("passwordHash", { required: true })}
               />
-              <Input.Error hasError={!!errors?.password} />
+              <Input.Error hasError={!!errors?.passwordHash} />
             </Input.Root>
           </div>
         </div>
@@ -115,5 +118,5 @@ export const RegisterPerson = () => {
       </div>
       {isLoading && <LoadingProgress />}
     </div>
-  );
+  ) : <Navigate to={'/'} />;
 };

@@ -36,7 +36,25 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+
+      span { 
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        p {
+        width: 70px;
+        text-align: end;
+        color: white;
+        cursor: pointer;
+        font-size: 13px;
+
+        &:hover {
+          font-weight: bold;
+          text-decoration: underline;
+        }
+      }
+      }
 
       button {
         margin-top: 10px;

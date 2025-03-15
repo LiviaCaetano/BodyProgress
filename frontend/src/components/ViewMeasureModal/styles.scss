@@ -1,0 +1,35 @@
+.view-measure-modal {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13px;
+
+  .view-measure-modal-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+
+    .measure-modal-item {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      label {
+        color: #333333;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .view-measure-modal {
+    width: 100%;
+  
+    .view-measure-modal-content {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}

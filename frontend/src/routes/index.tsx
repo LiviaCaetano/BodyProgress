@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { GraphicProvider } from "../contexts/GraphicContext";
 import { PersonProvider } from "../contexts/PersonContext";
 import { Home } from "../pages/Home";
 import { IMCPage } from "../pages/IMCPage";
@@ -21,7 +22,9 @@ export const Routers = () => {
               <DefaultLayout.Navbar />
               <DefaultLayout.Header />
               <DefaultLayout.Container>
-                <Home />
+                <GraphicProvider>
+                  <Home />
+                </GraphicProvider>
               </DefaultLayout.Container>
             </DefaultLayout.Root>
           </PrivateRoute>
@@ -35,7 +38,9 @@ export const Routers = () => {
               <DefaultLayout.Navbar />
               <DefaultLayout.Header />
               <DefaultLayout.Container>
-                <MeasuresList />
+                <PersonProvider>
+                  <MeasuresList />
+                </PersonProvider>
               </DefaultLayout.Container>
             </DefaultLayout.Root>
           </PrivateRoute>

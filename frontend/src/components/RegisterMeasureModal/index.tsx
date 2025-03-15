@@ -15,7 +15,7 @@ type RegisterMeasureModalProps = {
 export const RegisterMeasureModal = ({
   onClose,
 }: RegisterMeasureModalProps) => {
-  const { createMeasure } = useContext(PersonContext);
+  const { createMeasure, getMeasuresList } = useContext(PersonContext);
   const { person } = useContext(AuthenticationContext);
 
   const {
@@ -24,8 +24,11 @@ export const RegisterMeasureModal = ({
     formState: { errors },
   } = useForm<Measure.Register>();
 
-  const onSubmit = (data: Measure.Register) => {
-    createMeasure({ personId: person?.id, ...data }, () => onClose());
+  const onSubmit = (data: Omit<Measure.Register, "measurementDate">) => {
+    createMeasure({ measurementDate: new Date(), personId: person?.id, ...data }, () => {
+      onClose()
+      getMeasuresList()
+    });
   };
 
   return (
@@ -187,9 +190,9 @@ export const RegisterMeasureModal = ({
                 <Input.Label text="Quadril" variant="solid" />
                 <Input.Field
                   type="number"
-                  {...register("wait", { required: true })}
+                  {...register("waist", { required: true })}
                 />
-                <Input.Error hasError={!!errors?.wait} />
+                <Input.Error hasError={!!errors?.waist} />
               </Input.Root>
             </div>
           </div>

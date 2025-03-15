@@ -1,0 +1,13 @@
+.confirm-modal {
+  min-width: 360px;
+}
+
+.confirm-modal-actions {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+
+  button {
+    width: 120px;
+  }
+}

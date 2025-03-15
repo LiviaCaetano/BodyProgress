@@ -1,32 +1,54 @@
+import { MouseEvent, isValidElement } from "react";
 import "./styles.scss";
 
-type TableProps = {
-  headers: string[];
-  data: { [key: string]: string | number }[];
-  onRowClicked?: (rowData: { [key: string]: string | number }) => void;
+type TableColumn<T> = {
+  key: keyof T;
+  header: string;
+  width: string;
 };
 
-export const Table = ({ headers, data, onRowClicked }: TableProps) => {
+type TableProps<T extends Record<string, any>> = {
+  columns: TableColumn<T>[];
+  data: T[];
+  onRowClicked?: (rowData: T) => void;
+};
+
+export const Table = <T extends Record<string, any>>({
+  columns,
+  data,
+  onRowClicked,
+}: TableProps<T>) => {
   return (
     <div className="table-container">
       <table className="custom-table">
         <thead>
           <tr>
-            {headers.map((header, index) => (
-              <th key={index}>{header}</th>
+            {columns.map((column, index) => (
+              <th key={index} style={{ width: column?.width }}>
+                {column?.header}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {data.map((row, rowIndex) => (
+          {data?.map((row, rowIndex) => (
             <tr
               key={rowIndex}
-              onClick={() => onRowClicked?.(row)}
+              onClick={() => onRowClicked && onRowClicked(row)}
               className="clickable-row"
             >
-              {headers.map((header, colIndex) => (
-                <td key={colIndex}>{row[header]}</td>
-              ))}
+              {columns?.map((column, colIndex) => {
+                const cellValue = row[column?.key];
+
+                return (
+                  <td
+                    key={colIndex}
+                    onClick={column?.key === "action" ? (e: MouseEvent) => e.stopPropagation() : undefined}
+                  >
+                    {isValidElement(cellValue) ? cellValue : String(cellValue)}
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>

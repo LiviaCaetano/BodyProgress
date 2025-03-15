@@ -1,13 +1,13 @@
 .table-container {
   width: 100%;
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 
 .custom-table {
   width: 100%;
   border-collapse: collapse;
   background-color: #ffffff; 
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -15,7 +15,7 @@
 .custom-table thead {
   background-color: #1E88E5; 
   color: white;
-  text-transform: uppercase;
+  font-size: 14px;
 }
 
 .custom-table th {
@@ -25,8 +25,12 @@
 }
 
 .custom-table tbody tr {
-  border-bottom: 1px solid #ddd;
+  font-size: 14px;
   transition: background 0.3s ease-in-out;
+
+  &:nth-child(odd) {
+    background: #eaf0f5;
+  }
 }
 
 .custom-table td {
@@ -35,7 +39,7 @@
 }
 
 .custom-table tbody tr:hover {
-  background-color: #e3f2fd; 
+  background-color: #b8d5e9; 
   cursor: pointer;
 }
 

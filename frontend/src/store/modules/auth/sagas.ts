@@ -7,17 +7,16 @@ import * as actions from './actions'
 
 function* loginRequest(payload: any): Generator<any, void, any> {
   try {
-    const response = yield call(api.post, '/tokens', payload)
+    const response = yield call(api.post, '/auth/login', { ...payload.payload })
     
-    yield put(actions.loginSuccess({ ...response.data }))
-    
-    toast.success('Login realizado com sucesso!')
-
-    api.defaults.headers.Authorization = `Bearer ${response.data.token}`
-  } catch (e) {
-    toast.error('Usuário ou senha inválidos')
-    yield put(actions.loginFailure)
+    yield put(actions.loginSuccess({ ...response?.data }))
+    api.defaults.headers.Authorization = `Bearer ${response?.data?.token}`
     window.location.reload()
+    toast.success('Login realizado com sucesso!')
+  } catch (e) {
+    console.log(e)
+    toast.error('Usuário ou senha inválidos')
+    yield put(actions.loginFailure())
   }
 }
 

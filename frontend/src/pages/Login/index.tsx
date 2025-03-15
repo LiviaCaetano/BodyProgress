@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 import { BPIcon } from "../../assets/svgIcons/BPIcon";
 import { AuthenticationContext } from "../../contexts/AuthenticationContext";
 import { Authentication } from "../../models/authentication";
@@ -15,13 +17,17 @@ export const LoginPage = () => {
     formState: { errors },
   } = useForm<Authentication.Login>();
 
+  const navigate = useNavigate();
+
   const { handleLogin, isLoading } = useContext(AuthenticationContext);
 
+  const { isLogged } = useSelector((state: any) => state?.auth)
+
   const onSubmit = (data: Authentication.Login) => {
-    console.log(data);
+    handleLogin(data);
   };
 
-  return (
+  return !isLogged ? (
     <div className="login-page">
       <div className="login-page-form">
         <div className="login-page-icon">
@@ -49,6 +55,7 @@ export const LoginPage = () => {
             />
             <Input.Error hasError={!!errors?.password} />
           </Input.Root>
+          <span><p onClick={() => navigate('/register')}>Criar conta</p></span>
           <Button
             text="Entrar"
             variant="secondary"
@@ -58,5 +65,5 @@ export const LoginPage = () => {
       </div>
       {isLoading && <LoadingProgress />}
     </div>
-  );
+  ) : <Navigate to={'/'} />;
 };

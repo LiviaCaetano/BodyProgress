@@ -1,20 +1,24 @@
 import { createContext, ReactNode, useState } from "react";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { IMC } from "../models/imc";
 import { Measure } from "../models/measures";
 import { Person } from "../models/person";
-import { createMeasure } from "../services/api";
+import { createMeasure, excludeMeasureById, getMeasures } from "../services/api";
 import { optionsIMC } from "../utils/constants";
 
 export const PersonContext = createContext<Person.Context>({
   isLoading: false,
   createMeasure: (data: Measure.Register, callback: () => void) => {},
+  getMeasuresList: () => {},
   measureList: [] as Measure.List[],
+  deleteMeasure: (id: number, callback: () => void) => {},
   calcIMC: (data: IMC.Params) => {},
   imcResult: {} as IMC.Result | undefined,
 });
 
 export const PersonProvider = ({ children }: { children: ReactNode }) => {
+  const { id } = useSelector((state: any) => state.auth.person)
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [measureList, setMeasureList] = useState<Measure.List[]>(
     [] as Measure.List[]
@@ -23,6 +27,7 @@ export const PersonProvider = ({ children }: { children: ReactNode }) => {
     {} as IMC.Result
   );
 
+  //Measures
   const handleCreateMeasure = (
     data: Measure.Register,
     callback: () => void
@@ -37,6 +42,26 @@ export const PersonProvider = ({ children }: { children: ReactNode }) => {
       .finally(() => setIsLoading(false));
   };
 
+  const getMeasuresList = () => {
+    setIsLoading(true)
+    getMeasures(id).then((response) => setMeasureList(response?.data?.measures)).catch((error) => {
+      console.error(error)
+      toast.error("Erro ao buscar medidas!")
+    }).finally(() => setIsLoading(false));
+  }
+
+  const handleDeleteMeasure = (id: number, callback: () => void) => {
+    setIsLoading(true);
+    excludeMeasureById(id).then(() => {
+      toast.success("Medida excluída com sucesso!");
+      callback();
+    }).catch((error) => {
+      toast.error("Erro ao excluir medida!");
+      console.error(error);
+    }).finally(() => setIsLoading(false));
+  }
+
+  //IMC
   const handleCalcIMC = (data: IMC.Params) => {
     setIsLoading(true);
 
@@ -53,6 +78,8 @@ export const PersonProvider = ({ children }: { children: ReactNode }) => {
   const value = {
     isLoading,
     createMeasure: handleCreateMeasure,
+    getMeasuresList,
+    deleteMeasure: handleDeleteMeasure,
     measureList,
     calcIMC: handleCalcIMC,
     imcResult,

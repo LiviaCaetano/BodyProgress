@@ -12,6 +12,16 @@
       width: 200px;
     }
   }
+
+  .measures-list-table {
+    width: calc(100dvw - 242px);
+    height: calc(100dvh - 215px);
+    display: flex;
+    justify-content: center;
+    margin: 0 -20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -29,6 +39,14 @@
       button {
         width: 40px;
       }
+    }
+
+    .measures-list-table {
+      width: 100dvw;
+      height: calc(100dvh - 260px);
+      display: flex;
+      justify-content: center;
+      margin: 0 -20px;
     }
   }
 }

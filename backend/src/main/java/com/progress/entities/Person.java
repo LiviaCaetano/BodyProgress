@@ -1,6 +1,5 @@
 package com.progress.entities;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,28 +15,27 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 @Table(name = "person")
 @Entity
-public class Person implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+public class Person {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "Nome é obrigatório")
+	@NotBlank(message = "Name is required")
 	private String name;
 
+	@NotBlank(message = "Username is required")
+	@Pattern(regexp = "^[a-z0-9]+$", message = "Username must be all lowercase containing only letters and numbers")
 	private String username;
 
-	@NotBlank(message = "Senha é obrigatória")
-	@Size(min = 8, message = "A senha deve ter pelo menos 6 caracteres")
+	@NotBlank(message = "Password is required")
+	@Size(min = 6, message = "Password must be at least 6 characters long")
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String passwordHash;
-
-	private String token;
 
 	@Column(name = "date_of_birth")
 	private LocalDate dateOfBirth;
@@ -46,6 +44,8 @@ public class Person implements Serializable {
 
 	private Double height;
 
+	private String token;
+
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "person_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private List<Measures> measures;
@@ -53,18 +53,20 @@ public class Person implements Serializable {
 	public Person() {
 	}
 
-	public Person(Long id, @NotBlank(message = "Nome é obrigatório") String name, String username,
-			@NotBlank(message = "Senha é obrigatória") @Size(min = 8, message = "A senha deve ter pelo menos 8 caracteres") String passwordHash,
-			String token, LocalDate dateOfBirth, String gender, Double height) {
+	public Person(Long id, @NotBlank(message = "Name is required") String name,
+			@NotBlank(message = "Username is required") @Pattern(regexp = "^[a-z0-9]+$", message = "Username must be all lowercase containing only letters and numbers") String username,
+			@NotBlank(message = "Password is required") @Size(min = 6, message = "Password must be at least 6 characters long") String passwordHash,
+			LocalDate dateOfBirth, String gender, Double height, String token, List<Measures> measures) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.username = username;
 		this.passwordHash = passwordHash;
-		this.token = token;
 		this.dateOfBirth = dateOfBirth;
 		this.gender = gender;
 		this.height = height;
+		this.token = token;
+		this.measures = measures;
 	}
 
 	public Long getId() {
@@ -83,12 +85,13 @@ public class Person implements Serializable {
 		this.name = name;
 	}
 
-	public String getUserName() {
+	@JsonProperty("username")
+	public String getUsername() {
 		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.username = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPasswordHash() {
@@ -97,14 +100,6 @@ public class Person implements Serializable {
 
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
 	}
 
 	public LocalDate getDateOfBirth() {
@@ -119,7 +114,7 @@ public class Person implements Serializable {
 		return gender;
 	}
 
-	public void setGenero(String gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
@@ -129,6 +124,14 @@ public class Person implements Serializable {
 
 	public void setHeight(Double height) {
 		this.height = height;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public List<Measures> getMeasures() {

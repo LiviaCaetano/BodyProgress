@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Person } from "../../models/person";
 import { Button } from "../../ui/components/Button";
 import { Input } from "../../ui/components/Input";
+import { LoadingProgress } from "../../ui/components/LoadingProgress";
 import { Modal } from "../../ui/components/Modal";
 import { Select } from "../../ui/components/Select";
 import { AuthenticationContext } from "./../../contexts/AuthenticationContext";
@@ -13,7 +14,7 @@ type ManagePersonModalProps = {
 };
 
 export const ManagePersonModal = ({ onClose }: ManagePersonModalProps) => {
-  const { person } = useContext(AuthenticationContext);
+  const { person, handleUpdatePerson, isLoading } = useContext(AuthenticationContext);
 
   const {
     register,
@@ -31,7 +32,7 @@ export const ManagePersonModal = ({ onClose }: ManagePersonModalProps) => {
   });
 
   const onSubmit = (data: Person.Store) => {
-    console.log(data);
+    handleUpdatePerson(data, () => onClose());
   };
 
   return (
@@ -105,6 +106,7 @@ export const ManagePersonModal = ({ onClose }: ManagePersonModalProps) => {
           />
         </div>
       </Modal.Actions>
+      {isLoading && <LoadingProgress />}
     </Modal.Root>
   );
 };

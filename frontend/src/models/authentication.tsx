@@ -9,8 +9,8 @@ export namespace Authentication {
   export type Context = {
     isLoading: boolean;
     handleLogin: (data: Authentication.Login) => void;
-    handleLogout: () => void;
     registerPerson: (data: Person.Register) => void;
+    handleUpdatePerson: (data: Person.Store, callback: () => void) => void;
     person: Person.Store;
   };
 }

@@ -1,6 +1,7 @@
 package com.progress.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -23,21 +24,33 @@ public class Measures implements Serializable {
 	@Column(name = "person_id", nullable = false)
 	private Long personId;
 
-	private Double relaxedArm;
+	private LocalDate measurementDate;
 
-	private Double contractedArm;
+	private Double relaxedArmL;
 
-	private Double forearm;
+	private Double relaxedArmR;
 
-	private Double haunch;
+	private Double contractedArmL;
 
-	private Double calf;
+	private Double contractedArmR;
+
+	private Double foreArmL;
+
+	private Double foreArmR;
+
+	private Double haunchL;
+
+	private Double haunchR;
+
+	private Double calfL;
+
+	private Double calfR;
 
 	private Double relaxedChest;
 
 	private Double contractedChest;
 
-	private Double wait;
+	private Double waist;
 
 	private Double abdomen;
 
@@ -52,23 +65,31 @@ public class Measures implements Serializable {
 	public Measures() {
 	}
 
-	public Measures(Long id, Long personId, Double relaxedArm, Double contractedArm, Double forearm, Double haunch,
-			Double calf, Double relaxedChest, Double contractedChest, Double wait, Double abdomen, Double hip,
-			Double shoulder, Double currentWeight) {
+	public Measures(Long id, Long personId, LocalDate measurementDate, Double relaxedArmL, Double relaxedArmR,
+			Double contractedArmL, Double contractedArmR, Double foreArmL, Double foreArmR, Double haunchL,
+			Double haunchR, Double calfL, Double calfR, Double relaxedChest, Double contractedChest, Double waist,
+			Double abdomen, Double hip, Double shoulder, Double currentWeight, LocalDateTime createdAt) {
+		super();
 		this.id = id;
 		this.personId = personId;
-		this.relaxedArm = relaxedArm;
-		this.contractedArm = contractedArm;
-		this.forearm = forearm;
-		this.haunch = haunch;
-		this.calf = calf;
+		this.relaxedArmL = relaxedArmL;
+		this.relaxedArmR = relaxedArmR;
+		this.contractedArmL = contractedArmL;
+		this.contractedArmR = contractedArmR;
+		this.foreArmL = foreArmL;
+		this.foreArmR = foreArmR;
+		this.haunchL = haunchL;
+		this.haunchR = haunchR;
+		this.calfL = calfL;
+		this.calfR = calfR;
 		this.relaxedChest = relaxedChest;
 		this.contractedChest = contractedChest;
-		this.wait = wait;
+		this.waist = waist;
 		this.abdomen = abdomen;
 		this.hip = hip;
 		this.shoulder = shoulder;
 		this.currentWeight = currentWeight;
+		this.createdAt = createdAt;
 	}
 
 	@PrePersist
@@ -92,44 +113,92 @@ public class Measures implements Serializable {
 		this.personId = personId;
 	}
 
-	public Double getRelaxedArm() {
-		return relaxedArm;
+	public LocalDate getMeasurementDate() {
+		return measurementDate;
 	}
 
-	public void setRelaxedArm(Double relaxedArm) {
-		this.relaxedArm = relaxedArm;
+	public void setMeasurementDate(LocalDate measurementDate) {
+		this.measurementDate = measurementDate;
 	}
 
-	public Double getContractedArm() {
-		return contractedArm;
+	public Double getRelaxedArmL() {
+		return relaxedArmL;
 	}
 
-	public void setContractedArm(Double contractedArm) {
-		this.contractedArm = contractedArm;
+	public void setRelaxedArmL(Double relaxedArmL) {
+		this.relaxedArmL = relaxedArmL;
 	}
 
-	public Double getForearm() {
-		return forearm;
+	public Double getRelaxedArmR() {
+		return relaxedArmR;
 	}
 
-	public void setForearm(Double forearm) {
-		this.forearm = forearm;
+	public void setRelaxedArmR(Double relaxedArmR) {
+		this.relaxedArmR = relaxedArmR;
 	}
 
-	public Double getHaunch() {
-		return haunch;
+	public Double getContractedArmL() {
+		return contractedArmL;
 	}
 
-	public void setHaunch(Double haunch) {
-		this.haunch = haunch;
+	public void setContractedArmL(Double contractedArmL) {
+		this.contractedArmL = contractedArmL;
 	}
 
-	public Double getCalf() {
-		return calf;
+	public Double getContractedArmR() {
+		return contractedArmR;
 	}
 
-	public void setCalf(Double calf) {
-		this.calf = calf;
+	public void setContractedArmR(Double contractedArmR) {
+		this.contractedArmR = contractedArmR;
+	}
+
+	public Double getForeArmL() {
+		return foreArmL;
+	}
+
+	public void setForeArmL(Double foreArmL) {
+		this.foreArmL = foreArmL;
+	}
+
+	public Double getForeArmR() {
+		return foreArmR;
+	}
+
+	public void setForeArmR(Double foreArmR) {
+		this.foreArmR = foreArmR;
+	}
+
+	public Double getHaunchL() {
+		return haunchL;
+	}
+
+	public void setHaunchL(Double haunchL) {
+		this.haunchL = haunchL;
+	}
+
+	public Double getHaunchR() {
+		return haunchR;
+	}
+
+	public void setHaunchR(Double haunchR) {
+		this.haunchR = haunchR;
+	}
+
+	public Double getCalfL() {
+		return calfL;
+	}
+
+	public void setCalfL(Double calfL) {
+		this.calfL = calfL;
+	}
+
+	public Double getCalfR() {
+		return calfR;
+	}
+
+	public void setCalfR(Double calfR) {
+		this.calfR = calfR;
 	}
 
 	public Double getRelaxedChest() {
@@ -148,12 +217,12 @@ public class Measures implements Serializable {
 		this.contractedChest = contractedChest;
 	}
 
-	public Double getWait() {
-		return wait;
+	public Double getWaist() {
+		return waist;
 	}
 
-	public void setWait(Double wait) {
-		this.wait = wait;
+	public void setWaist(Double waist) {
+		this.waist = waist;
 	}
 
 	public Double getAbdomen() {
@@ -187,9 +256,13 @@ public class Measures implements Serializable {
 	public void setCurrentWeight(Double currentWeight) {
 		this.currentWeight = currentWeight;
 	}
-	
+
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	@Override

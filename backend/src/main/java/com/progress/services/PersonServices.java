@@ -49,12 +49,12 @@ public class PersonServices {
 
 	public Person getPersonById(Long id) {
 		return personRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Person with ID " + id + " not found"));
+						.orElseThrow(() -> new RuntimeException("Person with ID " + id + " not found"));
 	}
 
 	public Person updatedPerson(Long id, Person updatedPerson) {
 		Person existingPerson = personRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Pessoa não encontrada com ID: " + id));
+				.orElseThrow(() -> new RuntimeException("Person not found with ID: " + id));
 		return personRepository.save(existingPerson);
 	}
 
