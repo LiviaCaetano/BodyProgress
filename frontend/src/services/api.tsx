@@ -4,7 +4,7 @@ import { Measure } from "../models/measures";
 import { Person } from "../models/person";
 
 export const api = axios.create({
-  baseURL: "http://localhost:8080/",
+  baseURL: "http://bp-backend:8080/",
 });
 
 //Person
