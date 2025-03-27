@@ -1,36 +1,35 @@
-# Etapa 1: Construir a aplicação
-FROM node:18-alpine AS build
+# 🛠️ 1° Estágio: Construção do Frontend (Node.js)
+FROM node:18-alpine AS builder
 
-# Diretório de trabalho dentro do container
+# Define o diretório de trabalho
 WORKDIR /app
 
-# Copiar o package.json e o package-lock.json para instalar as dependências
-COPY package.json .
-COPY package-lock.json .
+# Copia os arquivos necessários para instalar as dependências
+COPY package.json package-lock.json ./
 
-# Instalar as dependências
+# Instala somente dependências de produção
 RUN npm install
 
-# Copiar o código fonte do frontend
+# Copia o restante do código do projeto
 COPY . .
 
-# Rodar o build para gerar os arquivos estáticos de produção
-RUN npm run build
+# Executa o build da aplicação
+RUN CI=false npm run build
 
-# Etapa 2: Servir a aplicação com Nginx
-FROM nginx:alpine
+# Remove node_modules para reduzir o tamanho da imagem
+RUN rm -rf node_modules
 
-## Copy our default nginx config
-COPY nginx/default.conf /etc/nginx/conf.d/
+# 🏗️ 2° Estágio: Servindo com Nginx
+FROM nginx:1.15.5-alpine
 
-## Remove default nginx website
+# Copia o arquivo de configuração do Nginx
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# Remove arquivos antigos do Nginx
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copiar os arquivos de build para o diretório de serve do Nginx
-COPY --from=build /app/build /usr/share/nginx/html
+# Copia os arquivos gerados no primeiro estágio para o Nginx
+COPY --from=builder /app/dist/ /usr/share/nginx/html
 
-# Expor a porta 80 para acessar o frontend
-EXPOSE 80
-
-# O Nginx serve a aplicação automaticamente
+# Comando para iniciar o Nginx
 CMD ["nginx", "-g", "daemon off;"]

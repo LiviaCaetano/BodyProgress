@@ -1,43 +1,23 @@
 #!/bin/bash
 
-# Função para realizar o deploy do backend
-deploy() {
-    echo "Iniciando o deploy do Backend..."
+echo "Iniciando o deploy do Backend..."
 
-    # Construir a imagem do backend
-    docker build -t bp-backend .
+set -e
+# Garantir que a rede 'bp-network' existe
+docker network ls | grep -wq "bp-network" || docker network create bp-network
 
-    # Parar o container do backend se estiver rodando
-    docker stop bp-backend || true
-    docker rm bp-backend || true
+# Construir a imagem do backend
+docker build -t bp-backend .
 
-    # Rodar o container do backend
-    docker run -d \
-        --name bp-backend \
-        --network bp-network \
-        -p 8080:8080 \
-        bp-backend
+# Parar e remover o container do backend se ele estiver rodando
+docker stop bp-backend || true
+docker rm bp-backend || true
 
-    echo "Backend implantado com sucesso!"
-}
+# Rodar o container do backend
+docker run -d \
+    --name bp-backend \
+    --network bp-network \
+    -p 8080:8080 \
+    bp-backend
 
-# Função para verificar se o Docker está rodando
-check_docker() {
-    if ! command -v docker &> /dev/null
-    then
-        echo "Docker não encontrado. Por favor, instale o Docker antes de continuar."
-        exit 1
-    fi
-
-    if ! docker info &> /dev/null
-    then
-        echo "Docker não está rodando. Inicie o Docker antes de continuar."
-        exit 1
-    fi
-}
-
-# Verificar se o Docker está instalado e rodando
-check_docker
-
-# Iniciar o deploy do backend
-deploy
+echo "Backend implantado com sucesso!"

@@ -1,5 +1,5 @@
 # Etapa 1: Construir a aplicação
-FROM maven:3.8.4-openjdk-11-slim AS build
+FROM jelastic/maven:3.9.5-openjdk-22.ea-b19 AS build
 
 # Diretório de trabalho dentro do container
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Etapa 2: Rodar a aplicação
-FROM openjdk:11-jre-slim
+FROM openjdk:22-jdk
 
 # Diretório de trabalho no container
 WORKDIR /app
