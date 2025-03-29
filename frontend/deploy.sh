@@ -2,21 +2,32 @@
 
 echo "Iniciando o deploy do Frontend..."
 
-set -e
+set -e  # Faz o script parar em caso de erro
 
-# Construir a imagem do frontend
-docker build -f Dockerfile -t bp-frontend .
+# Verificar se o container já está rodando e pará-lo
+if [ "$(docker ps -q -f name=bp-frontend)" ]; then
+    echo "Parando container existente..."
+    docker stop bp-frontend
+fi
 
-# Parar e remover o container do frontend se ele estiver rodando
-docker rm -f bp-frontend 2>/dev/null || true
+# Verificar se o container existe (rodando ou parado) e removê-lo
+if [ "$(docker ps -aq -f name=bp-frontend)" ]; then
+    echo "Removendo container existente..."
+    docker rm bp-frontend
+fi
 
-# Criando a rede para o container caso não exista
-docker network ls | grep -wq "bp-network" || docker network create bp-network
+# Verificar se a imagem já existe e removê-la antes do build
+if [ "$(docker images -q bp-frontend)" ]; then
+    echo "Removendo imagem existente..."
+    docker rmi bp-frontend
+fi
 
-# Rodar o container do frontend
-docker container run -d \
+# Construir a nova imagem do frontend
+docker build -t bp-frontend .
+
+# Rodar o novo container do frontend
+docker run -d \
     --name bp-frontend \
-    --network bp-network \
     -p 80:80 \
     bp-frontend
 
