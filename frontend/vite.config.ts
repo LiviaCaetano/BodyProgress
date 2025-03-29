@@ -19,10 +19,11 @@ export default defineConfig({
         start_url: '/',
         name: 'BodyProgress',
         short_name: 'BodyProgress',
-        description: 'BodyProgress - ',
+        description: 'BodyProgress',
         theme_color: '#1E88E5',
         background_color: '#1E88E5',
         display: 'standalone',
+        orientation: 'portrait',
         icons: [
           {
             "src": "icons/png-48x48.png",
@@ -83,7 +84,4 @@ export default defineConfig({
     port: 3000,
     host: '0.0.0.0'
   },
-  build: {
-    manifest: true
-  }
 })
